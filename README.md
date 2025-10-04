@@ -85,9 +85,16 @@ REDIS_URL=redis://localhost:6379
 Running the Application
 Option 1: Run Entire Stack with Docker
 
-Recommended approach. This launches the App, MySQL, RabbitMQ, and Redis together. Uncomment the app section in the compose file
+Recommended approach. This launches the App, MySQL, RabbitMQ, and Redis together. 
+Uncomment the app section in the compose.yml file.
+Update your .env file to use the Docker service names instead of localhost, for example:
 
-docker-compose up --build
+DATABASE_HOST=mysql
+MESSAGE_BROKER_URL=amqp://guest:guest@rabbitmq:5672
+REDIS_URL=redis://redis:6379
+
+Then run:
+docker-compose --env-file .env up --build  
 
 Option 2: Run Locally, Connect to Dockerized Services
 docker-compose up -d mysql redis rabbitmq
