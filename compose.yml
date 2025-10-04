@@ -1,0 +1,71 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${MESSAGE_BROKER_USER}
+      RABBITMQ_DEFAULT_PASS: ${MESSAGE_BROKER_PASSWORD}
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "${DATABASE_PORT}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  # app:
+  #   build: .
+  #   container_name: snapnet_app
+  #   restart: unless-stopped
+  #   environment:
+  #     PORT: ${PORT}
+  #     DATABASE_HOST: ${DATABASE_HOST}
+  #     DATABASE_PORT: ${DATABASE_PORT}
+  #     DATABASE_NAME: ${DATABASE_NAME}
+  #     DATABASE_USER: ${DATABASE_USER}
+  #     DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+  #     MESSAGE_BROKER_USER: ${MESSAGE_BROKER_USER}
+  #     MESSAGE_BROKER_PASSWORD: ${MESSAGE_BROKER_PASSWORD}
+  #     MESSAGE_BROKER_URL: ${MESSAGE_BROKER_URL}
+  #     EXCHANGE_NAME: ${EXCHANGE_NAME}
+  #     LEAVE_BINDING_KEY: ${LEAVE_BINDING_KEY}
+  #     LEAVE_QUEUE_NAME: ${LEAVE_QUEUE_NAME}
+  #   depends_on:
+  #     - mysql
+  #     - rabbitmq
+  #     - redis
+  #   command: ["./wait.sh", "mysql:3306", "--", "npm", "start"]
+  #   networks:
+  #     - app-network
+  #   ports:
+  #     - "${PORT}:8000"
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
