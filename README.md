@@ -123,9 +123,9 @@ Run tests with:
 npm test
 
 API Overview
-Method	Endpoint	                    Description
-POST	/departments	                Create a department
-GET	/departments/:id/employees	        List employees in a department
-POST	/employees	                    Create an employee
-GET	/employees/:id	                    Get an employee and their leave history
-POST	/leave-requests	                Submit a leave request (queued)
+Method	Endpoint	                        Description
+POST	/departments	                    Create a department
+GET	    /departments/:id/employees	        List employees in a department
+POST	/employees	                        Create an employee
+GET	    /employees/:id	                    Get an employee and their leave history
+POST	/leave-requests	                    Submit a leave request (queued)
