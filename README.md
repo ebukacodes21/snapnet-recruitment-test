@@ -85,7 +85,7 @@ REDIS_URL=redis://localhost:6379
 Running the Application
 Option 1: Run Entire Stack with Docker
 
-Recommended approach. This launches the app, MySQL, RabbitMQ, and Redis together. Uncomment the app section in the compose file
+Recommended approach. This launches the App, MySQL, RabbitMQ, and Redis together. Uncomment the app section in the compose file
 
 docker-compose up --build
 
