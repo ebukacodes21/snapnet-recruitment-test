@@ -129,3 +129,6 @@ GET	    /departments/:id/employees	        List employees in a department
 POST	/employees	                        Create an employee
 GET	    /employees/:id	                    Get an employee and their leave history
 POST	/leave-requests	                    Submit a leave request (queued)
+GET     /system-health                      Returns application health
+GET     /database-health                    Returns database health
+GET     /queue-health                       Returns queue health
