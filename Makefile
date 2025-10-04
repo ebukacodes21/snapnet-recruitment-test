@@ -5,4 +5,4 @@ table:
 composeup:
 	docker compose up -d
 composedown:
-	docker compose down
+	docker compose down -v
